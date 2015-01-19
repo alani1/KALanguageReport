@@ -1,0 +1,7 @@
+{% extends "LanguageStatistic/main.html" %}
+{% load staticfiles %}
+{% block body %}
+{% include "LanguageStatistic/menu.html" %}
+{% include "LanguageStatistic/help.html" %}
+{{ html | safe }}
+{% endblock %}

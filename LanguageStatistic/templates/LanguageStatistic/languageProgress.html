@@ -1,0 +1,67 @@
+{% extends "LanguageStatistic/main.html" %}
+{% load staticfiles %}
+{% block body %}
+{% include "LanguageStatistic/menu.html" %}
+{% include "LanguageStatistic/help.html" %}
+<div id="wrapper">
+{{ summary | safe }}
+</div>
+<div id="wrapper">
+<a name="crowdin"></a>
+<h1>Translated Words on Crowdin</h1>
+    <table id="keywords" class="sort" cellspacing="0" cellpadding="0">'
+    <thead><th class='lalign'>Category</th><th>% done</th><th>Left</th><th>Approved</th></thead>
+{{ crowdin | safe }}
+</div>
+<div id="wrapper">
+{{ dubVideo | safe }}
+</div>
+<div id="wrapper">
+{{ subVideo | safe }}
+</div>
+<div  id="activity" id="wrapper">
+{% include "LanguageStatistic/activity.html" %}
+</div>
+<div id="wrapper">
+<br/><p/><a name="charts"></a><center><h1>Charts for Translation Progress</h1><div id="chart_div" style="height:400px"></div></center>
+</div>
+{% endblock %}
+
+{% block script %}
+ <script type="text/javascript" id="js">
+//google.load("visualization", "1.1", {packages:["bar"]});
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+
+    var jsonData = $.ajax({
+        url: "/report/data/{{ lang.code }}",
+        dataType:"json",
+        async: false
+    }).responseText;
+
+    var data = new google.visualization.DataTable(jsonData);
+    var options = {
+          width: 700,
+          chart: {
+            title: 'Progress towards Test Site',
+            subtitle: 'Videos on the right axis'
+          },
+          series: {
+            0: { axis: 'left', targetAxisIndex: 0, label: 'Crowdin' },
+            1: { axis: 'right', targetAxisIndex: 1, label: 'Subtitles' },
+            2: { axis: 'right', targetAxisIndex: 1, label: 'Videos' }
+          },
+          axes: {
+            y: {
+              left: {label: 'Strings'}, // Left y-axis.
+              right: {side: 'right', } // Right y-axis.
+            }
+          }
+        };
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+  //var chart = new google.charts.Bar(document.getElementById('chart_div'));
+  chart.draw(data, options);
+  }
+  </script>
+  {% endblock %}

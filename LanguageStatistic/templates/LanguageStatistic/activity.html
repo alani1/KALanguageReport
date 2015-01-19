@@ -1,0 +1,22 @@
+{% load ka_extras %}
+<h1>Activity in the Last 30 days</h1>
+<div role="tabpanel">
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#crowdin" aria-controls="crowdin" role="tab" data-toggle="tab">Crowdin</a></li>
+   <li role="presentation"><a href="#amara" aria-controls="amara" role="tab" data-toggle="tab">Amara</a></li>
+</ul>
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane fade in active" id="crowdin">
+  {{ crowdinActivity | safe }}
+  </div>
+  <div role="tabpanel" class="tab-pane fade" id="amara">
+    <table id="keywords" class="sort" cellspacing="0" cellpadding="0">
+    <thead><th class='lalign'>Name</th><th>Videos</th><th>Time</th><th>Subtitles</th></thead>
+    {% for a in amaraActivity %}    
+    <tr><td><a href="http://www.amara.org/en/profiles/profile/{{ a.0 }}/">{{ a.0 }}</a></td><td>{{ a.1 }}</td><td>{{ a.2|ftime }}</td><td>{{ a.3 }}</td></tr>
+    {% endfor %}
+    <tr><td>Total</td><td> </td><td></td><td> </td></tr>
+    </table>
+  </div>
+</div>
+</div>

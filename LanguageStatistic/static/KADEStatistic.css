@@ -1,0 +1,206 @@
+@import url('http://fonts.googleapis.com/css?family=Amarante');
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html { overflow-y: scroll; }
+
+body { 
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;  
+  color: #585858;
+  padding: 70px 10px;
+  padding-bottom: 55px;
+}
+
+::selection { background: #5f74a0; color: #fff; }
+::-moz-selection { background: #5f74a0; color: #fff; }
+::-webkit-selection { background: #5f74a0; color: #fff; }
+
+br { display: block; line-height: 1.6em; } 
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+
+input, textarea { 
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none; 
+}
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong, b { font-weight: bold; } 
+
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; max-width: 100%; }
+
+h1 { 
+  font-family: 'Amarante', Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  line-height: 1.7em;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-top: 50px;
+}
+
+p { text-align:center;}
+
+/** page structure **/
+
+.container {
+    width: 100%;
+}
+
+#wrapper {
+  display: block;
+  background: #fff;
+  margin: 0 auto;
+  padding: 10px 17px;
+  -webkit-box-shadow: 2px 2px 3px -1px rgba(0,0,0,0.35);
+}
+
+#keywords {
+  margin: 0 auto;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+#keywords thead {
+  cursor: pointer; 
+  border-bottom: 1px solid #ddd;  
+}
+
+#keywords thead tr th { 
+  font-weight: bold;
+  padding: 10px 10px;
+  padding-left: 10px;
+  text-align:right;
+}
+#keywords thead tr th.lalign {
+  text-align: left;
+}
+#keywords thead tr th span { 
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  background: #acc8dd;
+}
+
+#keywords thead tr th.headerSortUp span {
+  /*background-image: url('http://i.imgur.com/SP99ZPJ.png');*/
+}
+#keywords thead tr th.headerSortDown span {
+  /*background-image: url('http://i.imgur.com/RkA9MBo.png');*/
+}
+
+#keywords tbody tr { 
+  color: #555;
+}
+
+#keywords tbody tr.total {
+  border-top: 1px solid #ddd;
+  font-weight: bold;
+}
+
+#keywords tbody tr a:hover { 
+  color:62842f;
+  text-decoration: underline;
+}
+
+#keywords tbody tr.odd {
+    background: none repeat scroll 0 0 #f9f9f9;
+}
+
+#keywords tbody tr.bold {
+    font-weight:bold;
+}
+
+#keywords tbody tr td {
+  text-align: right;
+  padding: 5px 10px;
+}
+#keywords tbody tr td.lalign {
+  text-align: left;
+}
+#keywords tbody tr td.ralign {
+  text-align: right;
+}
+
+#keywords a {
+    color: #9bbc44;
+    text-decoration: none;
+}
+
+.html5-progress-bar {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+
+}
+.html5-progress-bar progress {
+    background-color: #f3f3f3;
+    border: 0 none;
+    border-radius: 9px;
+    height: 18px;
+    width:100%;
+}
+.html5-progress-bar progress::-moz-progress-bar {
+    background: linear-gradient(to bottom, #cdeb8e 0%, #a5c956 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-radius: 9px;
+}
+.html5-progress-bar .progress-value {
+    color: #555;
+    float: right;
+    font-size: 0.8em;
+    height: 18px;
+    line-height: 20px;
+    margin-left: 5px;
+    padding: 0 5px;
+} 
+
+.html5-progress-bar progress:hover:after {
+    display: block;
+    content: attr(value);
+}
+
+.dub {
+    display:inline-block;
+    line-height:18px; /* check your icon height */
+    background:url(dub.png)  center left no-repeat;
+    padding-left:22px;
+} 
+
+.sub {
+    display:inline-block;
+    line-height:18px; /* check your icon height */
+    background:url(sub.png)  center left no-repeat;
+    padding-left:22px;
+}

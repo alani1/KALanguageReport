@@ -1,0 +1,31 @@
+{% extends "LanguageStatistic/main.html" %}
+{% load staticfiles %}
+{% block body %}
+<div id='wrapper'><h1>Status for Khan Academy's I18N Initiatives </h1>
+<center>This is a new version, the old report can be found under <a href="/oldreport/">http://www.kadeutsch.org/oldreport</a></center>
+<div id="tabs"><ul>
+<li><a href="#Test">Test</a></li>
+<li><a href="#Live">Live</a></li>
+<li><a href="#Rockstar">Rockstar</a>
+</li></ul>
+
+{% if targets %}
+{% for t in targets %}
+<div id="{{t}}">
+<table id="keywords" class="sort" cellspacing="0" cellpadding="0"><thead><th class="lalign"></th><th></th><th>Dub</th><th>Amara</th><th colspan="3" class="center">Crowdin</th></thead>
+<thead><th class="lalign">Language</th><th></th><th>Hours</th><th>Subtitles</th><th>Left*</th><th>Speed*</th><th>ETA*</th></thead>
+    {% if languageList %}
+    {% for lang in languageList %}
+    {% if lang.target == t %}
+        <tr><td><a href="{{ base }}{{ lang.code }}/{{ lang.target }}SiteStatistic.html">{{ lang.name }}</a></td><td>{{ lang.data.progress | safe }}</td>
+                <td>{{ lang.data.D.left }}</td><td>{{ lang.data.S.left }}</td><td>{{ lang.data.C.left }}</td><td>{{ lang.data.C.speed }}</td><td>{{ lang.data.C.eta }}</td></tr>
+    {% endif %}                   
+    {% endfor %}
+    {% endif %}
+</table><center>*Speed and ETA calculated for Crowdin Strings only (assumption 33 Words / String, Speed is strings/month)</center>
+</div>   
+{% endfor %}    
+{% endif %}
+
+</div>
+{% endblock %}
