@@ -11,6 +11,8 @@ from django.utils import timezone
 from django.core.management.base import BaseCommand, CommandError
 from LanguageStatistic.models import Video, Subtitle, Language
 from LanguageStatistic import utils
+import operator
+from django.db.models import Q
 
 q = Queue()
 languages = Language.objects.filter(enabled=True)
@@ -24,25 +26,28 @@ class Command(BaseCommand):
         fstart = time()
         pool_size = int(2)
         
+        [SubGetter() for i in range(pool_size)]
+
         updateAll = False
+        amaraIDs = []
         for arg in args:
             if (arg == 'all'):
                 updateAll = True
-
-        [SubGetter() for i in range(pool_size)]
-
+            else:
+                amaraIDs.append(Q(AMARA_ID=arg))
+                
         #Create a Queue of all Videos where we want to load subtitles
-        videos = Video.objects.exclude(AMARA_ID__isnull=True)
-        
-        if (not updateAll):
-            videos.filter(amaraOK = False)
+        videos = Video.objects.exclude(AMARA_ID__isnull=True).filter(reduce(operator.or_, amaraIDs))
+                    
+        #if (not updateAll):
+        #    videos = videos.filter(amaraOK = False)
         
         print("Updating {} subtitles ...".format(videos.count()))
         [q.put(video) for video in videos]
 
         q.join()
         
-        print( "finished after " + ftime( fstart - time()) )
+        print( "finished after " + utils.ftime( fstart - time()) )
 
 # Load Subtitles for one Videos for all enabled Languages
 class SubGetter(Thread):
@@ -108,8 +113,10 @@ class SubGetter(Thread):
         
         if ("objects" in doc):
             #iterate over all language objects
+            
             for obj in doc["objects"]:           
                 if ( obj["language_code"] == langid.lower() ):
+                        
                     lines    = obj["subtitle_count"]
                     infoData = obj
                     completion = obj["subtitles_complete"]
@@ -136,12 +143,14 @@ class SubGetter(Thread):
         cc.author = author
         cc.created = created
           
-        if (self.loadSubtitleStrings):
+        if (self.loadSubtitleStrings or cc.infoData==""):
             try:
                 ddoc = utils.get_response_json(self.conn, query)
                 #Count number of lines ignoring empty ones
                 cc.lines = self.getLines(ddoc["subtitles"])
                 cc.data = ddoc
+                if (cc.title == '' ):
+                    cc.title = ddoc['title']
             except:
                 message = "JSON problem on loadCC {}/{} - {}"
                 print(message.format(self.video.AMARA_ID, langid, sys.exc_info()[0]))

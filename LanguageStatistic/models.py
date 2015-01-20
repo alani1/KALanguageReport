@@ -132,7 +132,8 @@ class Video(models.Model):
             self.subtitle = Subtitle(origLines=0,lines=0,percentDone=0)
 
     def getTranslatedTitle(self):
-        return self.subtitle.title
+        title = self.subtitle.title
+        return title if (title <> "") else self.TITLE
      
     def subtitleComplete(self):
         return self.subtitle.isComplete()
@@ -149,6 +150,17 @@ class Video(models.Model):
     def getYoutubeID(self,lang):
         return getattr(self,lang.master)
     
+    def getAuthor(self,lang):
+        if (not self.isDubbed(lang)):
+            return self.subtitle.author
+        elif lang.code == "de":
+            if (str(self.deTranslator) == 'alani'):
+                return 'unknown'
+            else:
+                return self.deTranslator
+        
+        return ''
+        
     subtitle = {}
     
     deTranslator        = models.ForeignKey(User,default=DEFAULT_TRANSLATOR_ID)

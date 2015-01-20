@@ -67,7 +67,7 @@ class VideoStatistic:
     
         html = '<h1>'+self.title+status+'</h1>'
         html += '<table id="keywords" class="sort" cellspacing="0" cellpadding="0">'
-        html += "<thead><th class='lalign'>Subject</th><th class='lalign'>Title</th><th>Length</th><th>Subtitles<th></thead>"
+        html += "<thead><th class='lalign'>Subject</th><th class='lalign'>Title</th><th>Length</th><th>Author</th><th>Subtitles<th></thead>"
     
         #print ( "length of videos : " + str(len(videos)))
         for v in videos:
@@ -93,23 +93,18 @@ class VideoStatistic:
             #Create URL for link to Youtube, if we have a translated version, take this else the English version
             if (v.isDubbed(self.lang)):
                 url = "'http://www.youtube.com/watch?v=" + v.getYoutubeID(self.lang) +"'"
-                #TODO find Language translation of title (eventually take from amara)
-                #title = self.lang.code+": "+ v.TITLE;
-                title = v.getTranslatedTitle()
-                title = title if (title <> "") else v.TITLE
-                cssClass = "dub"
+                cssClass = "dub"                        
             else:
                 url = "'http://www.youtube.com/watch?v={}&hl={}'".format(v.ENGLISH,self.lang.code)
                 cssClass = "sub"
-                title = v.TITLE
         
-            link = u"<a target='_blank' href={0} class='{2}'>{1}</a>".format(url,title,cssClass)
-            
+            link = u"<a target='_blank' href={0} class='{2}'>{1}</a>".format(url,v.getTranslatedTitle(),cssClass)
             
             cc = u"<a target='_blank' title='{0} of {1} subtitles by {2}' href={3}>{4:7.2f} %</a>".format(
                 v.subtitleTranslatedCount(), v.subtitleCount(), v.subtitle.author, amaraURL.format(v.AMARA_ID), v.subtitlePercentDone()*100, cssClass )
             
-            html += "<tr><td class='lalign'>"+v.SUBJECT+"</td><td class='lalign'>"+link+"</td><td>"+ftime(int(v.DURATION))+"</td><td>"+cc+"</td></tr>"
+            html += u"<tr><td class='lalign'>{0}</td><td class='lalign'>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>".format(
+                v.SUBJECT, link, ftime(int(v.DURATION)), v.getAuthor(self.lang), cc)
             lineCount +=1
             total += int(v.DURATION)
 
