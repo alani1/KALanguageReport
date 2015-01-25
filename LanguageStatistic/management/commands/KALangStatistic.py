@@ -132,7 +132,7 @@ class Command(BaseCommand):
         self.dubVideo.generateMenu(menuItems)
         
         context = Context( {
-            'title':"Completed Videos for '+self.lang.name+ ' ' +self.target+ ' site of Khanacademy",
+            'title':"Completed Videos for "+self.lang.name+ ' ' +self.target+ " site of Khanacademy",
             'base': "http://www.kadeutsch.org/report/static",
             'updated': time.strftime("%d.%m.%Y - %H:%M %Z"),
             'lang': self.lang,
