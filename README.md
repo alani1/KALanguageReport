@@ -1,4 +1,4 @@
-# Generates Progress Report for Khan Academy Language Translation efforts
+# KALanguageReport
 
 KALanguageReport is a lightweight Django web app for to show progress Khan Academy's different Language Translation efforts are making toward reaching certain milestones defined by KA.
 KALanguageReport is a tool of the KA Deutsch Community and is not officially affiliated with, nor maintained by, Khan Academy, but rather makes use of different APIs all over the internet to track the translation progress for different languages.
