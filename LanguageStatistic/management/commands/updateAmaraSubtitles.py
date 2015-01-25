@@ -37,7 +37,9 @@ class Command(BaseCommand):
                 amaraIDs.append(Q(AMARA_ID=arg))
                 
         #Create a Queue of all Videos where we want to load subtitles
-        videos = Video.objects.exclude(AMARA_ID__isnull=True).filter(reduce(operator.or_, amaraIDs))
+        videos = Video.objects.exclude(AMARA_ID__isnull=True)
+        if (len(amaraIDs)>0):
+            videos = videos.filter(reduce(operator.or_, amaraIDs))
                     
         #if (not updateAll):
         #    videos = videos.filter(amaraOK = False)
@@ -143,7 +145,7 @@ class SubGetter(Thread):
         cc.author = author
         cc.created = created
           
-        if (self.loadSubtitleStrings or cc.infoData==""):
+        if (self.loadSubtitleStrings):
             try:
                 ddoc = utils.get_response_json(self.conn, query)
                 #Count number of lines ignoring empty ones
