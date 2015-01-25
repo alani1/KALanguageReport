@@ -4,6 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from django.template import RequestContext, loader
+from django.views.decorators.cache import cache_control
 
 from LanguageStatistic.models import Video,Subtitle,Language,LanguageStatistic
 from LanguageStatistic.utils import ftime
@@ -111,7 +112,7 @@ def getKATopic(slug):
         return "URLError while loading from KA-API for " + slug
             
 
-
+@cache_control(must_revalidate=True, max_age=60)
 def StatisticData(request,lang):
     #parameters, language, ev. also date range
     #return same format like the data.json file
@@ -119,7 +120,7 @@ def StatisticData(request,lang):
     
     today = datetime.date.today()
     #should be changed to 30 days over time as data quality in db improves
-    thirty_days_ago = today - datetime.timedelta(days=7)
+    thirty_days_ago = today - datetime.timedelta(days=14)
     #should be ordered by date ascending
     statDataList = LanguageStatistic.objects.all().filter(lang=lang).filter(date__gte=thirty_days_ago).order_by('date')
 
@@ -132,7 +133,7 @@ def StatisticData(request,lang):
     for s in statDataList:
         if (date != s.date):
             if (date != ''):
-                print("appending {}".format(date))
+                # print("appending {}".format(date))
                 data.append( [ s.date, int(crowdin.getLeft()), int(subVideo.getLeftString()), int(dubVideo.getLeftString()), subVideo.getLeft(), dubVideo.getLeft(), 
                 float(crowdin.getPercent()), float(subVideo.getPercent()), float(dubVideo.getPercent())  ])
                 crowdin = ''
