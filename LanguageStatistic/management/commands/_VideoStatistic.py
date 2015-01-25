@@ -98,6 +98,9 @@ class VideoStatistic:
                 url = "'http://www.youtube.com/watch?v={}&hl={}'".format(v.ENGLISH,self.lang.code)
                 cssClass = "sub"
         
+            if (v.showsExercise):
+                cssClass += " exercise"
+        
             link = u"<a target='_blank' href={0} class='{2}'>{1}</a>".format(url,v.getTranslatedTitle(),cssClass)
             
             cc = u"<a target='_blank' title='{0} of {1} subtitles by {2}' href={3}>{4:7.2f} %</a>".format(

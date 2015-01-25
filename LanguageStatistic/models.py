@@ -151,20 +151,25 @@ class Video(models.Model):
         return getattr(self,lang.master)
     
     def getAuthor(self,lang):
-        if (not self.isDubbed(lang)):
-            return self.subtitle.author
-        elif lang.code == "de":
-            if (str(self.deTranslator) == 'alani'):
-                return 'unknown'
+        if(lang.code == "de"):
+            if (str(self.deTranslator) == 'admin'):
+                if(self.isDubbed(lang)):
+                    return 'unknown'
+                else:
+                    return self.subtitle.author
             else:
                 return self.deTranslator
-        
-        return ''
+        else:
+            if (self.isDubbed(lang)):
+                return "unknown"
+            else:
+                return self.subtitle.author
         
     subtitle = {}
     
     deTranslator        = models.ForeignKey(User,default=DEFAULT_TRANSLATOR_ID)
     amaraOK             = models.BooleanField(default=False)
+    showsExercise       = models.BooleanField(default=False)
     SERIAL              = models.IntegerField()
     DATE_ADDED          = models.DateField('Updated')
     DATE_CREATED        = models.DateField('Date')
@@ -180,43 +185,43 @@ class Video(models.Model):
     AMARA_ID            = models.CharField(db_index=True,max_length=16)
     REQUIRED_FOR        = models.CharField(db_index=True,max_length=32)
     TRANSCRIPT          = models.CharField(max_length=1)
-    ENGLISH             = models.CharField(max_length=16)
-    ARABIC              = models.CharField(max_length=16)
-    ARMENIAN            = models.CharField(max_length=16)
-    BAHASA_INDONESIA    = models.CharField(max_length=16)
-    BANGLA              = models.CharField(max_length=16)
-    BULGARIAN           = models.CharField(max_length=16)
-    CHINESE             = models.CharField(max_length=16)
-    CZECH               = models.CharField(max_length=16)
-    DANISH              = models.CharField(max_length=16)  
-    DEUTSCH             = models.CharField(max_length=16)
-    ESPANOL             = models.CharField(max_length=16)
-    FARSI               = models.CharField(max_length=16)
-    FRANCAIS            = models.CharField(max_length=16)
-    GREEK               = models.CharField(max_length=16)
-    HEBREW              = models.CharField(max_length=16)
-    ITALIANO            = models.CharField(max_length=16)
-    JAPANESE            = models.CharField(max_length=16)
-    KISWAHILI           = models.CharField(max_length=16)
-    KOREAN              = models.CharField(max_length=16)
-    MONGOLIAN           = models.CharField(max_length=16)
-    NEDERLANDS          = models.CharField(max_length=16)
-    NEPALI              = models.CharField(max_length=16)
-    NORSK               = models.CharField(max_length=16)
-    POLISH              = models.CharField(max_length=16)
-    PORTUGUES           = models.CharField(max_length=16)
-    PORTUGAL_PORTUGUES  = models.CharField(max_length=16)
-    PUNJABI             = models.CharField(max_length=16)
-    RUSSIAN             = models.CharField(max_length=16)
-    SERBIAN             = models.CharField(max_length=16)
-    SINDHI              = models.CharField(max_length=16)
-    SINHALA             = models.CharField(max_length=16)
-    TAMIL               = models.CharField(max_length=16)
-    TELUGU              = models.CharField(max_length=16)
-    THAI                = models.CharField(max_length=16)
-    TURKCE              = models.CharField(max_length=16)
-    UKRAINIAN           = models.CharField(max_length=16)
-    URDU                = models.CharField(max_length=16)
-    XHOSA               = models.CharField(max_length=16)
-    ZULU                = models.CharField(max_length=64)
+    ENGLISH             = models.CharField(max_length=16,blank=True)
+    ARABIC              = models.CharField(max_length=16,blank=True)
+    ARMENIAN            = models.CharField(max_length=16,blank=True)
+    BAHASA_INDONESIA    = models.CharField(max_length=16,blank=True)
+    BANGLA              = models.CharField(max_length=16,blank=True)
+    BULGARIAN           = models.CharField(max_length=16,blank=True)
+    CHINESE             = models.CharField(max_length=16,blank=True)
+    CZECH               = models.CharField(max_length=16,blank=True)
+    DANISH              = models.CharField(max_length=16,blank=True)  
+    DEUTSCH             = models.CharField(max_length=16,blank=True)
+    ESPANOL             = models.CharField(max_length=16,blank=True)
+    FARSI               = models.CharField(max_length=16,blank=True)
+    FRANCAIS            = models.CharField(max_length=16,blank=True)
+    GREEK               = models.CharField(max_length=16,blank=True)
+    HEBREW              = models.CharField(max_length=16,blank=True)
+    ITALIANO            = models.CharField(max_length=16,blank=True)
+    JAPANESE            = models.CharField(max_length=16,blank=True)
+    KISWAHILI           = models.CharField(max_length=16,blank=True)
+    KOREAN              = models.CharField(max_length=16,blank=True)
+    MONGOLIAN           = models.CharField(max_length=16,blank=True)
+    NEDERLANDS          = models.CharField(max_length=16,blank=True)
+    NEPALI              = models.CharField(max_length=16,blank=True)
+    NORSK               = models.CharField(max_length=16,blank=True)
+    POLISH              = models.CharField(max_length=16,blank=True)
+    PORTUGUES           = models.CharField(max_length=16,blank=True)
+    PORTUGAL_PORTUGUES  = models.CharField(max_length=16,blank=True)
+    PUNJABI             = models.CharField(max_length=16,blank=True)
+    RUSSIAN             = models.CharField(max_length=16,blank=True)
+    SERBIAN             = models.CharField(max_length=16,blank=True)
+    SINDHI              = models.CharField(max_length=16,blank=True)
+    SINHALA             = models.CharField(max_length=16,blank=True)
+    TAMIL               = models.CharField(max_length=16,blank=True)
+    TELUGU              = models.CharField(max_length=16,blank=True)
+    THAI                = models.CharField(max_length=16,blank=True)
+    TURKCE              = models.CharField(max_length=16,blank=True)
+    UKRAINIAN           = models.CharField(max_length=16,blank=True)
+    URDU                = models.CharField(max_length=16,blank=True)
+    XHOSA               = models.CharField(max_length=16,blank=True)
+    ZULU                = models.CharField(max_length=64,blank=True)
                  

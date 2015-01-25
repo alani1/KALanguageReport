@@ -204,3 +204,17 @@ p { text-align:center;}
     background:url(sub.png)  center left no-repeat;
     padding-left:22px;
 }
+
+.dub.exercise {
+   background-image : url(dub.png), url(exercise.png);
+   background-position: left center, right center;
+   background-size: ,22px 22px;
+   padding-right: 22px;
+}
+
+.sub.exercise {
+   background-image : url(sub.png), url(exercise.png);
+   background-position: left center, right center;
+   background-size: ,22px 22px;
+   padding-right: 22px;
+}

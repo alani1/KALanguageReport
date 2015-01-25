@@ -8,11 +8,11 @@ langs = ('ENGLISH', 'DEUTSCH')
 class VideoAdmin(admin.ModelAdmin):
     ordering = ['SERIAL']
     search_fields = ['TITLE', 'DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL', 'REQUIRED_FOR', 'AMARA_ID', 'ENGLISH', 'DEUTSCH']
-    list_filter = ('amaraOK','DATE_ADDED','REQUIRED_FOR','DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL')
-    list_display = ('DATE_ADDED', 'TITLE', 'DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL', 'REQUIRED_FOR')
+    list_filter = ('showsExercise','deTranslator','DATE_ADDED','REQUIRED_FOR','DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL')
+    list_display = ('DATE_ADDED', 'TITLE', 'DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL', 'deTranslator')
     fieldsets = (
         (None, {
-            'fields': (('SERIAL', 'TITLE'), ('DATE_CREATED', 'DATE_ADDED'),  ('DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL'), ('ENGLISH','AMARA_ID','amaraOK'), ('DEUTSCH', 'deTranslator') ),
+            'fields': (('SERIAL', 'TITLE'), ('DATE_CREATED', 'DATE_ADDED'),  ('DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL'), ('ENGLISH','AMARA_ID','amaraOK', 'showsExercise'), ('DEUTSCH', 'deTranslator') ),
          }),
          ('More Languages', {
             'classes': ('collapse',),
