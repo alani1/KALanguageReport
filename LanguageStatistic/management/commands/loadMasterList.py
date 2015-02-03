@@ -24,7 +24,6 @@ class Command(BaseCommand):
         #dir_data = config["paths"]["dir_data"]
         
         #ID of Google Doc for Masterlist, update every month when new Masterlist is published
-        key = "1ir94UxXHbxd78pgfGgCiotEN44NDKGNceHlWPk66D8Q"
         key = "135EvaTE4u0cdiNJvdxXQLNmw1zPzjUqyfSIhmvrJf8M"
         gid = 0
         doc = self.load_doc(key, gid)
@@ -69,8 +68,8 @@ class Command(BaseCommand):
                 
             v.save()
 
-        print( "%s Videos updated".format(updatedVideoCount))
-        print( "%s new Videos added".format(newVideoCount))
+        print( "{0} Videos updated".format(updatedVideoCount))
+        print( "{0} new Videos added".format(newVideoCount))
         print( "finished after " + ftime( fstart - time()) )
 
     def load_doc(self, key, gid):
