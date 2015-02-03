@@ -35,7 +35,7 @@ generate the report files for specific LANGUAGE. Make sure the LANGUAGE is defin
 ## Python prerequirements to be installed
 
 pip install jsonfield
-pip install django-admin-bootstrapped
+pip install django-import-export
 
 ## License information:
 
