@@ -218,3 +218,8 @@ p { text-align:center;}
    background-size: ,22px 22px;
    padding-right: 22px;
 }
+
+#KALink {
+    text-align:center;
+    margin:5px;
+}

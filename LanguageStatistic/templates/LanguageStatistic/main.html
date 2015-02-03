@@ -16,6 +16,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.18.3/js/jquery.tablesorter.min.js"></script>
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>        
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="{% static "bootstrap.youtubepopup.js" %}"></script>
         
         <script type="text/javascript" id="js">
         //jQuery for page scrolling feature - requires jQuery Easing plugin
@@ -30,8 +31,10 @@
         
         });        
         $(function(){
+            
             $( "#tabs" ).tabs();            
-            $('table.sort').tablesorter();        
+            $('table.sort').tablesorter();
+            $(".yt").YouTubeModal({autoplay:0, width:640, height:480});
         });
         </script>
 {% block script %}{% endblock %}

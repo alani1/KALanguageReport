@@ -93,10 +93,10 @@ class VideoStatistic:
             #Create URL for link to Youtube, if we have a translated version, take this else the English version
             if (v.isDubbed(self.lang)):
                 url = "'http://www.youtube.com/watch?v=" + v.getYoutubeID(self.lang) +"'"
-                cssClass = "dub"                        
+                cssClass = "yt dub"                        
             else:
                 url = "'http://www.youtube.com/watch?v={}&hl={}'".format(v.ENGLISH,self.lang.code)
-                cssClass = "sub"
+                cssClass = "yt sub"
         
             if (v.showsExercise):
                 cssClass += " exercise"
