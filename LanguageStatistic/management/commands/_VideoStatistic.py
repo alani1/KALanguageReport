@@ -37,14 +37,14 @@ class VideoStatistic:
     def generateMenu(self,menuItems):
         subject = ''
         
-        #videos = sorted(self.doneVideos + self.missingVideos, key=lambda v: v.SUBJECT)
-        videos = self.allVideos
-        #menuItems = []
+        videos = sorted(self.allVideos, key=lambda v: v.SUBJECT)
         for v in videos:
             if (subject != v.SUBJECT):
+                print(subject)
                 menuItems.append([slugify(v.SUBJECT),v.SUBJECT])
                 subject = v.SUBJECT
-                
+
+        
 
         return menuItems
         
@@ -203,6 +203,7 @@ class VideoStatistic:
             #verify for every Video if Subtitles are available in our language
             #Check if CSV file shows a Dubbed Video for Language
             self.allVideos.append(v)
+            
             if ( v.isDubbed(self.lang) ):
                 dubbedCount += 1
                 dubbedSecs += int(v.DURATION)
@@ -337,16 +338,15 @@ class VideoStatistic:
         
     #return list of videos to be dubbed for specified target platform
     def getVideosDubbed(self,target):
-        videos = Video.objects.filter(REQUIRED_FOR='Test platform (dubbed)')    
-        return videos
+        videos = Video.objects.filter(REQUIRED_FOR='Test platform (dubbed)').order_by("SUBJECT", 'SERIAL')  
+        return videos.order_by("SUBJECT")
 
     #return list of videos to be subtitled for specified target platform
     def getVideosSubtitled(self,target):
 
-        videos = Video.objects.all()
+        videos = Video.objects.all().order_by("SUBJECT", 'SERIAL')
         
         if ( target == "Test" ):
-        
             videos = videos.filter(REQUIRED_FOR="Test platform")
         elif ( target == "Live" ):
         
@@ -354,4 +354,4 @@ class VideoStatistic:
         #elif ( target == "Rockstar" ):
         #    return __videosTestSubtitled + __videosLive + __videosRockstar
         
-        return videos
+        return videos.order_by("SUBJECT", 'SERIAL')
