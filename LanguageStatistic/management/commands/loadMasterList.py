@@ -22,9 +22,8 @@ class Command(BaseCommand):
         fstart = time()
         #logger = utils.get_logger("spreadsheet")
         #dir_data = config["paths"]["dir_data"]
-        
         #ID of Google Doc for Masterlist, update every month when new Masterlist is published
-        key = "135EvaTE4u0cdiNJvdxXQLNmw1zPzjUqyfSIhmvrJf8M"
+        key = "1T5zhuXwZha6M6tN-CacsJUQV6Wm_a6IdjelgrM_Z5fQ"
         gid = 0
         doc = self.load_doc(key, gid)
         #Below line could be used to load a file which corrects mapping errors
@@ -70,7 +69,7 @@ class Command(BaseCommand):
 
         print( "{0} Videos updated".format(updatedVideoCount))
         print( "{0} new Videos added".format(newVideoCount))
-        print( "finished after " + ftime( fstart - time()) )
+        print( "finished after " + ftime( time() - fstart ) )
 
     def load_doc(self, key, gid):
         doc = utils.get_google_csv(key, gid)
