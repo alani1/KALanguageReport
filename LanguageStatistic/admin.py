@@ -10,6 +10,13 @@ from datetime import date
 
 langs = ('ENGLISH', 'DEUTSCH')
 
+class KAAdmin(admin.ModelAdmin):
+    class Media:
+        js = (
+            'jquery.multiple.select.js',
+            'KAReportAdmin.js',
+        )
+
 class VideoResource(resources.ModelResource):
     class Meta:
         model = Video
@@ -50,10 +57,8 @@ class VideoAdmin(ImportExportModelAdmin):
     #change_list_template = "LanguageStatistic/adminChangeList.html"         
     class Media:
         js = (
-            #'//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', # jquery
-            #'js/myscript.js',       # project static folder
             'jquery.multiple.select.js',
-            'KAReportAdmin.js',   # app static folder
+            'KAReportAdmin.js',
         )
      
     
@@ -69,14 +74,14 @@ class LanguageAdmin(admin.ModelAdmin):
     pass
     
 @admin.register(Subtitle)
-class SubtitleAdmin(admin.ModelAdmin):
+class SubtitleAdmin(KAAdmin):
     list_display = ( 'created', 'amaraID', 'lang', 'title', 'author',  'origLines', 'lines', 'completion', 'percentDone', 'infoData')
     search_fields = ( 'amaraID', 'title', 'author' )
-    list_filter = ( 'completion', 'lang', 'author')
+    list_filter = ( 'completion', 'lang', 'author')    
     pass
 
 @admin.register(LanguageStatistic)
-class LanguageStatisticAdmin(admin.ModelAdmin):
+class LanguageStatisticAdmin(KAAdmin):
     ordering = ['-date','lang','type']
     list_display = ('date', 'lang', 'type','target', 'total', 'count', 'speed', 'totalSecs', 'countSecs', 'speedSecs','totalStrings','countStrings','speedStrings')
     list_filter = ('date','lang','type','target',)
