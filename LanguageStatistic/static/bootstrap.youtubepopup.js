@@ -66,7 +66,8 @@
               setModalTitle(videoTitle);
             }
             
-            setKALink(youtubeId);
+            var origYoutubeId = obj.attr('rel');
+            setKALink(youtubeId,origYoutubeId);
             //setKAExercises(youtubeId);
 
             resizeModal(options.width);
@@ -89,14 +90,18 @@
     }
   };
 
-  function setKALink(youtubeId) {
+  function setKALink(youtubeId,origYoutubeId) {
     var url = ["http://www.khanacademy.org/api/v1/videos/", youtubeId].join('');
     $.ajax({
       url: url,
       dataType: 'jsonp',
       cache: true,
       success: function (data) {
-        var url = "http://translate.khanacademy.org" + data.relative_url;
+        if ( data != null && data.relative_url != null ) {
+            url = "http://translate.khanacademy.org" + data.relative_url;
+        } else {
+            url = "http://translate.khanacademy.org/video?v=" + origYoutubeId;
+        }
         $KALink.html("<h4><a target='_blank' href='"+url+"'>See Video & Exercises on Khan Academy</a></h4>");
       }
     });  

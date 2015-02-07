@@ -101,7 +101,7 @@ class VideoStatistic:
             if (v.showsExercise):
                 cssClass += " exercise"
         
-            link = u"<a target='_blank' href={0} class='{2}'>{1}</a>".format(url,v.getTranslatedTitle(),cssClass)
+            link = u"<a target='_blank' href={0} class='{2}' rel='{3}'>{1}</a>".format(url,v.getTranslatedTitle(),cssClass,v.ENGLISH)
             
             cc = u"<a target='_blank' title='{0} of {1} subtitles by {2}' href={3}>{4:7.2f} %</a>".format(
                 v.subtitleTranslatedCount(), v.subtitleCount(), v.subtitle.author, amaraURL.format(v.AMARA_ID), v.subtitlePercentDone()*100, cssClass )
