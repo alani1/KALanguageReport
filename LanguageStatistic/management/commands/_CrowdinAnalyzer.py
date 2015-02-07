@@ -5,7 +5,6 @@ try:
 except ImportError:
     import urllib2
 
- 
 import json
 import re
 import math
@@ -193,16 +192,7 @@ class CrowdinAnalyzer:
         userObj = {'name':'none','phrase_commented':0,'phrase_suggested':0,'suggestion_deleted':0,'suggestion_voted':0,'suggestion_approved':0,'suggestion_disapproved':0,
         'join_group':0,'pretranslate_suggestion':0,'suggestion_replaced':0,'last':0, 'new_thread':0, 'suggestion_uploaded':0, 'uploaded_suggestion_approved':0}
 
-        activities = json.loads(activityData)
-        
-        #this is for a leaderboard starting with a certain date/time
-        #if ( self.lang['LeaderBoard'] != '' ):
-        #    import datetime
-        #    import time
-        #    dt = datetime.datetime(2014, 12, 01, 00, 00)
-        #    dt = self.lang['LeaderBoard']
-        #    ts = time.mktime(dt.timetuple())       
-        
+        activities = json.loads(activityData)      
         
         for act in activities['activity']:      
             uid = act['user_id']
@@ -251,14 +241,18 @@ class CrowdinAnalyzer:
         output += '</table>'
     
         # arbitraty assumption that every string consists of 27-33 words
-        month = float(left)/((suggested-deleted)*33)
-        days = month * 30
+        if( suggested-deleted > 0 ):
+            month = float(left)/((suggested-deleted)*33)
+            days = month * 30
     
-        from datetime import timedelta, datetime
-        #from dateutil.relativedelta import relativedelta
-        i = datetime.today() + timedelta(days=days)
-        eta = "{0}.{1}.{2}".format(i.day, i.month, i.year)
-    
+            from datetime import timedelta, datetime
+            #from dateutil.relativedelta import relativedelta
+            i = datetime.today() + timedelta(days=days)
+            eta = "{0}.{1}.{2}".format(i.day, i.month, i.year)
+        else:
+            eta = "never"
+            month = 99
+            
         self.speed = suggested
         self.eta = eta
         self.velocityString = "<p>At the current speed {0} it will take {1:0.2f} month to complete CrowdinStrings. ETA {2}</p>".format(suggested, month,eta)
