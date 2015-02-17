@@ -182,7 +182,7 @@ class Video(models.Model):
     TITLE_ID            = models.CharField(max_length=256)
     DURATION            = models.IntegerField()
     URL                 = models.CharField(max_length=256)
-    AMARA_ID            = models.CharField(db_index=True,max_length=16)
+    AMARA_ID            = models.CharField(db_index=True,max_length=16,blank=True)
     REQUIRED_FOR        = models.CharField(db_index=True,max_length=32)
     TRANSCRIPT          = models.CharField(max_length=1)
     ENGLISH             = models.CharField(max_length=16,blank=True)
