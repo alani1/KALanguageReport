@@ -11,6 +11,7 @@ from LanguageStatistic.utils import ftime
 
 import datetime
 import time
+import operator
 
 try:
     import urllib.request as urllib2
@@ -34,35 +35,41 @@ def index(request):
 
         lang.data = {}
         percent = 0
+        percentSpeed = 0
         for d in statDataList:
             lang.data[d.type] = {}
             
             if ( d.type == 'C' ):
                 percent = percent + (float(d.countSecs) / d.totalSecs)
+                percentSpeed = (float(d.speed) / (d.totalSecs-d.countSecs))
                
                 lang.data[d.type]['left'] = "{:,}".format((d.totalSecs - d.countSecs))
-                lang.data[d.type]['speed'] = d.speedStrings
+                lang.data[d.type]['speed'] = d.speed   #speedStrings
                 
-                month = float(d.totalStrings - d.countStrings) / d.speedStrings
+                month = float(d.total - d.count) / d.speed
                 days = month * 30
                 i = datetime.datetime.today() + datetime.timedelta(days=days)
                 lang.data[d.type]['eta'] = "{0}.{1}.{2}".format(i.day, i.month, i.year)                
                 
             else:
                 percent = percent + (float(d.countSecs) / d.totalSecs)
+                percentSpeed = percentSpeed + (float(d.speed) / (d.totalSecs-d.countSecs))
                 lang.data[d.type]['left'] = ftime(d.totalSecs - d.countSecs)
                 lang.data[d.type]['speed'] = d.speed
             
         percent = percent / 3
+        lang.progress = percent
+        lang.data['progressSpeed'] = "{0:0.2f}%".format(percentSpeed/3)
         lang.data['progress'] = '<div class="html5-progress-bar"><span>{0:0.2f}</span>%<progress value="{0:0.2f}" max="100"></progress></div>'.format(percent*100)
             
-        
+     
+    orderedLanguageList = sorted(languageList, key=operator.attrgetter('progress'), reverse=True)
     template = loader.get_template('LanguageStatistic/index.html')
     context = RequestContext(request, {
         'title':"Khanacdemy Translation Summary",
         'base': "http://www.kadeutsch.org/report/",
         'targets': ('Test', 'Live', 'Rockstar' ),
-        'languageList': languageList,
+        'languageList': orderedLanguageList,
         
     })    
     
@@ -120,7 +127,7 @@ def StatisticData(request,lang):
     
     today = datetime.date.today()
     #should be changed to 30 days over time as data quality in db improves
-    thirty_days_ago = today - datetime.timedelta(days=14)
+    thirty_days_ago = today - datetime.timedelta(days=30)
     #should be ordered by date ascending
     statDataList = LanguageStatistic.objects.all().filter(lang=lang).filter(date__gte=thirty_days_ago).order_by('date')
 

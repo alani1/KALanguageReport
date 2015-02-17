@@ -1,8 +1,7 @@
 {% extends "LanguageStatistic/main.html" %}
 {% load staticfiles %}
 {% block body %}
-<div id='wrapper'><h1>Status for Khan Academy's I18N Initiatives </h1>
-<center>This is a new version, the old report can be found under <a href="/oldreport/">http://www.kadeutsch.org/oldreport</a></center>
+<h1>Status for Khan Academy's I18N Initiatives </h1>
 <div id="tabs"><ul>
 <li><a href="#Test">Test</a></li>
 <li><a href="#Live">Live</a></li>
@@ -22,10 +21,10 @@
     {% endif %}                   
     {% endfor %}
     {% endif %}
-</table><center>*Speed and ETA calculated for Crowdin Strings only (assumption 33 Words / String, Speed is strings/month)</center>
+</table><center>*Speed and ETA calculated for Crowdin Words only (if your language has less than 30 days data or recently changed Target Speed and ETA might be wrong)</center>
 </div>   
 {% endfor %}    
 {% endif %}
 
-</div>
+
 {% endblock %}
