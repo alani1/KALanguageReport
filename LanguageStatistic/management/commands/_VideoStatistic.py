@@ -3,11 +3,13 @@
 
 """
 from __future__ import unicode_literals
-from LanguageStatistic.models import Video,Subtitle,Language,LanguageStatistic
 from django.template.defaultfilters import slugify
+from django.db.models import Q
+
 import datetime
 from LanguageStatistic import utils
 from LanguageStatistic.utils import ftime
+from LanguageStatistic.models import Video,Subtitle,Language,LanguageStatistic
 
 trgt = {'Test' : 'T',
         'Live' : 'L',
@@ -40,7 +42,6 @@ class VideoStatistic:
         videos = sorted(self.allVideos, key=lambda v: v.SUBJECT)
         for v in videos:
             if (subject != v.SUBJECT):
-                print(subject)
                 menuItems.append([slugify(v.SUBJECT),v.SUBJECT])
                 subject = v.SUBJECT
 
@@ -349,9 +350,8 @@ class VideoStatistic:
         if ( target == "Test" ):
             videos = videos.filter(REQUIRED_FOR="Test platform")
         elif ( target == "Live" ):
-        
-            videos = videos.filter(REQUIRED_FOR="Test platform")
+            videos = videos.filter(Q(REQUIRED_FOR="Test platform")|Q(REQUIRED_FOR="Live platform"))
         #elif ( target == "Rockstar" ):
-        #    return __videosTestSubtitled + __videosLive + __videosRockstar
+     
         
         return videos.order_by("SUBJECT", 'SERIAL')
