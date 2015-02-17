@@ -46,7 +46,7 @@ class VideoAdmin(ImportExportModelAdmin):
     list_display_links = ('DATE_ADDED', 'TITLE')
     fieldsets = (
         (None, {
-            'fields': (('SERIAL', 'TITLE'), ('DATE_CREATED', 'DATE_ADDED'),  ('DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL'), ('ENGLISH','AMARA_ID','amaraOK', 'showsExercise'), ('DEUTSCH', 'deTranslator') ),
+            'fields': (('SERIAL', 'TITLE'), ('DATE_CREATED', 'DATE_ADDED'),  ('DOMAIN', 'SUBJECT', 'TOPIC', 'TUTORIAL'), ('ENGLISH','AMARA_ID','amaraOK', 'showsExercise'), ('URL'), ('DEUTSCH', 'deTranslator') ),
          }),
          ('More Languages', {
             'classes': ('collapse',),
