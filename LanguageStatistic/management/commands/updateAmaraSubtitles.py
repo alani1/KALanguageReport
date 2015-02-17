@@ -49,7 +49,7 @@ class Command(BaseCommand):
 
         q.join()
         
-        print( "finished after " + utils.ftime( fstart - time()) )
+        print( "finished after " + utils.ftime(time() - fstart) )
 
 # Load Subtitles for one Videos for all enabled Languages
 class SubGetter(Thread):
@@ -96,7 +96,7 @@ class SubGetter(Thread):
         
         #Load data from Amara API
         try:
-            print('query {}'.format(self.video.AMARA_ID))
+            #print('query {}'.format(self.video.AMARA_ID))
             doc = utils.get_response_json(self.conn, query)
             return doc
         except:
