@@ -8,7 +8,16 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
   1. Install Python 2.7 and `pip` (e.g. `sudo easy_install pip`)
   2. `sudo pip install -r requirements.txt`
   3. Clone git repository: `git clone https://github.com/alani1/KALanguageReport.git`
-  4. Copy default configuration: `cp KALanguageReport/settings.default KALanguageReport/settings.py` and adapt the DB and last 3 values
+  4. Copy default configuration: `cp KALanguageReport/settings.default KALanguageReport/settings.py`
+  5. Create database: `python manage.py syncdb`
+
+Now you're ready for the initial data import:
+  1. `python manage.py loadMasterList`
+  2. `python manage.py upateAmaraMapping`
+  3. `python manage.py updateSubtitles`
+  4. `python manage.py KALangStatistics de`
+
+If desired, replace `de` by your language in step 4.
 
 
 ## Enhancement Ideas and TODOs
