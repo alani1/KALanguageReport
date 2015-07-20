@@ -8,7 +8,7 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
   1. Install Python 2.7
   2. Install Django 1.7
   3. Clone git repository: `git clone https://github.com/alani1/KALanguageReport.git`
-  4. copy the file `KALanguageReport/settings.default` to `settings.py` and adapt the DB and last 3 values
+  4. Copy default configuration: `cp KALanguageReport/settings.default settings.py` and adapt the DB and last 3 values
 
 
 ## Install python dependencies
