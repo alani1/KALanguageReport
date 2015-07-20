@@ -8,7 +8,7 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
   1. Install Python 2.7 and `pip` (e.g. `sudo easy_install pip`)
   2. `sudo pip install -r requirements.txt`
   3. Clone git repository: `git clone https://github.com/alani1/KALanguageReport.git`
-  4. Copy default configuration: `cp KALanguageReport/settings.default settings.py` and adapt the DB and last 3 values
+  4. Copy default configuration: `cp KALanguageReport/settings.default KALanguageReport/settings.py` and adapt the DB and last 3 values
 
 
 ## Enhancement Ideas and TODOs
@@ -19,7 +19,7 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
 ## Commands to be used on the commandline
 
 To start the development server use:
-```python manage.py runserver 0.0.0.0:8008```
+```python manage.py runserver 0.0.0.0   :8008```
 
 ```python manage.py loadMasterlist```
 Should be run every Month once the new Masterlist is out. First update with new DocumentID
