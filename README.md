@@ -5,17 +5,10 @@ KALanguageReport is a tool of the KA Deutsch Community and is not officially aff
 Especially reaching 100% does in no way mean that Khan Academy will upgrade your language to the next stage. But could be a strong indicator that you are getting ready for this.
 
 ## Installation
-  1. Install Python 2.7
-  2. Install Django 1.7
+  1. Install Python 2.7 and `pip` (e.g. `sudo easy_install pip`)
+  2. `sudo pip install -r requirements.txt`
   3. Clone git repository: `git clone https://github.com/alani1/KALanguageReport.git`
   4. Copy default configuration: `cp KALanguageReport/settings.default settings.py` and adapt the DB and last 3 values
-
-
-## Install python dependencies
-
-```bash
-sudo pip install -r requirements.txt
-```
 
 
 ## Enhancement Ideas and TODOs
