@@ -28,7 +28,7 @@ If desired, replace `de` by your language in step 4.
 ## Commands to be used on the commandline
 
 To start the development server use:
-```python manage.py runserver 0.0.0.0   :8008```
+```python manage.py runserver 0.0.0.0:8008```
 
 ```python manage.py loadMasterlist```
 Should be run every Month once the new Masterlist is out. First update with new DocumentID
