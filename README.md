@@ -19,7 +19,7 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
 ## Commands to be used on the commandline
 
 To start the development server use:
-```python manage.py runserver 37.221.195.59:8008```
+```python manage.py runserver 0.0.0.0:8008```
 
 ```python manage.py loadMasterlist```
 Should be run every Month once the new Masterlist is out. First update with new DocumentID
