@@ -1,0 +1,3 @@
+jsonfield
+django
+django-import-export

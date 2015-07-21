@@ -5,10 +5,20 @@ KALanguageReport is a tool of the KA Deutsch Community and is not officially aff
 Especially reaching 100% does in no way mean that Khan Academy will upgrade your language to the next stage. But could be a strong indicator that you are getting ready for this.
 
 ## Installation
-  1. Install Python 2.7
-  2. Install Django 1.7
-  3. get code from github
-  4. copy the file KALanguageReport/settings.default to settings.py and adapt the DB and last 3 values 
+  1. Install Python 2.7 and `pip` (e.g. `sudo easy_install pip`)
+  2. `sudo pip install -r requirements.txt`
+  3. Clone git repository: `git clone https://github.com/alani1/KALanguageReport.git`
+  4. Copy default configuration: `cp KALanguageReport/settings.default KALanguageReport/settings.py`
+  5. Create database: `python manage.py syncdb`
+
+Now you're ready for the initial data import:
+  1. `python manage.py loadMasterList`
+  2. `python manage.py upateAmaraMapping`
+  3. `python manage.py updateSubtitles`
+  4. `python manage.py KALangStatistics de`
+
+If desired, replace `de` by your language in step 4.
+
 
 ## Enhancement Ideas and TODOs
 - [ ] Add awesome charts with dynamic date selection etc.
@@ -18,9 +28,9 @@ Especially reaching 100% does in no way mean that Khan Academy will upgrade your
 ## Commands to be used on the commandline
 
 To start the development server use:
-`python manage.py runserver 37.221.195.59:8008
+```python manage.py runserver 0.0.0.0:8008```
 
-`python manage.py loadMasterlist`
+```python manage.py loadMasterlist```
 Should be run every Month once the new Masterlist is out. First update with new DocumentID
 
 `python manage.py updateAmaraMapping`
@@ -31,11 +41,6 @@ download amara subtitle information, this process takes very long
 
 `python manage.py KALangStatistic LANGUAGE`
 generate the report files for specific LANGUAGE. Make sure the LANGUAGE is defined in the database
-
-## Python prerequirements to be installed
-
-pip install jsonfield
-pip install django-import-export
 
 ## License information:
 
